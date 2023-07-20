@@ -1,114 +1,70 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+const cafes = await Astro.glob("./cafes/*.md");
+const beaches = await Astro.glob("./beaches/*.md");
 ---
 
 <Layout title="Remote Kochi">
-	<main>
-		<h1>Remote <span class="text-gradient">Kochi</span></h1>
-		<p>
-			Work Friendly cafes and spots for nomads
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://goo.gl/maps/K9baVCSd1LjTY8e98"
-				title="Poems Cafe"
-				location="Kakkanad"
-				type="Cafe"
-			/>
-			<Card
-				href="https://goo.gl/maps/dMrheibtERU4fDro8"
-				title="Forwords Cafe"
-				location="Kakkanad"
-				type="Cafe"
-			/>
-			<Card
-				href="https://goo.gl/maps/ZEjWrULHkYYvrQe98"
-				title="Tonico Cafe"
-				location="Kakkanad"
-				type="Cafe"
-			/>
-			<Card
-				href="https://goo.gl/maps/qt14FhCxd46gd4dT7"
-				title="ViiBee Cafe"
-				location="Kakkanad"
-				type="Cafe"
-			/>
-			<Card
-				href="https://goo.gl/maps/VwPrP4kYpEPX7bUC8"
-				title="Urban Forest"
-				location="Muttam"
-				type="Cafe"
-			/>
-			<Card
-				href="https://goo.gl/maps/X84K4VP8FF7SsUCy7"
-				title="Starbucks"
-				location="Edapally"
-				type="Cafe"
-			/>
-			<Card
-				href="https://goo.gl/maps/u5rgQ8nR26A43qaR9"
-				title="Qissa Cafe"
-				location="Fort Kochi"
-				type="Cafe"
-			/>
-			<Card
-				href="https://goo.gl/maps/5K76LK1u9bxEjTs48"
-				title="Collective Coworks"
-				location="Edachira"
-				type="Coworking Space"
-			/>
-			<Card
-				href="https://goo.gl/maps/gMLNiQgfzR9Srb8w6"
-				title="Innerspace"
-				location="Edapally"
-				type="Coworking Space"
-			/>
-		</ul>
-	</main>
+  <main>
+    <h1>Remote <span class="text-gradient">Kochi</span></h1>
+    <p>Work Friendly cafes and spots for nomads</p>
+    <ul role="list" class="link-card-grid">
+      {
+        cafes?.map(({ frontmatter: { map, name, location } }) => (
+          <Card href={map} title={name} location={location} type="Cafe" />
+        ))
+      }
+      {
+        beaches?.map(({ frontmatter: { map, name, location } }) => (
+          <Card href={map} title={name} location={location} type="Beach" />
+        ))
+      }
+    </ul>
+  </main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  main {
+    margin: auto;
+    padding: 1.5rem;
+    max-width: 60ch;
+  }
+  h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0;
+  }
+  .text-gradient {
+    background-image: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 400%;
+    background-position: 0%;
+  }
+  .instructions {
+    line-height: 1.6;
+    margin: 1rem 0;
+    border: 1px solid rgba(var(--accent), 25%);
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.4rem;
+  }
+  .instructions code {
+    font-size: 0.875em;
+    font-weight: bold;
+    background: rgba(var(--accent), 12%);
+    color: rgb(var(--accent));
+    border-radius: 4px;
+    padding: 0.3em 0.45em;
+  }
+  .instructions strong {
+    color: rgb(var(--accent));
+  }
+  .link-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    gap: 1rem;
+    padding: 0;
+  }
 </style>
