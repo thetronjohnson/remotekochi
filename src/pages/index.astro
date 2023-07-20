@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
 const cafes = await Astro.glob("./cafes/*.md");
 const beaches = await Astro.glob("./beaches/*.md");
+const coworkingSpaces = await Astro.glob("./coworking-spaces/*.md");
 ---
 
 <Layout title="Remote Kochi">
@@ -13,6 +14,11 @@ const beaches = await Astro.glob("./beaches/*.md");
       {
         cafes?.map(({ frontmatter: { map, name, location } }) => (
           <Card href={map} title={name} location={location} type="Cafe" />
+        ))
+      }
+      {
+        coworkingSpaces?.map(({ frontmatter: { map, name, location } }) => (
+          <Card href={map} title={name} location={location} type="Coworking Space" />
         ))
       }
       {
